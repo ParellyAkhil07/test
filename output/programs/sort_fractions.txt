@@ -1,0 +1,41 @@
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+public class SortFractions {
+    public static void main(String[] args) {
+        Random random = new Random();
+        List<Double> nums = new ArrayList<>();
+
+        // Generate 100 random numbers between 0 and 1000, rounded to 3 decimal places
+        for (int i = 0; i < 100; i++) {
+            double num = Math.round(random.nextDouble() * 1000 * 1000.0) / 1000.0;
+            nums.add(num);
+        }
+
+        // Sort the numbers based on their fractional part
+        List<String> sortedFractions = sortFractional(nums);
+        for (String fraction : sortedFractions) {
+            System.out.println(fraction);
+        }
+    }
+
+    // Method to sort numbers based on their fractional part
+    public static List<String> sortFractional(List<Double> nums) {
+        List<String> fractions = new ArrayList<>();
+
+        // Extract the fractional part of each number
+        for (Double num : nums) {
+            String numStr = num.toString();
+            int index = numStr.indexOf('.');
+            if (index != -1) {
+                fractions.add(numStr.substring(index + 1));
+            } else {
+                fractions.add("0"); // If no fractional part, consider it as 0
+            }
+        }
+
+        // Sort the list of fractional parts
+        Collections.sort(fractions);
+        return fractions;
+    }
