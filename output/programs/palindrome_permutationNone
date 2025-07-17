@@ -1,0 +1,31 @@
+import java.util.Map;
+
+public class PalindromePermutation {
+
+    // Function to check if the string is a permutation of a palindrome
+    public static boolean isPalPerm(String string) {
+        Map<Character, Integer> letCounts = new HashMap<>();
+        int odd = 0;
+
+        // Count occurrences of each character
+        for (char let : string.toCharArray()) {
+            letCounts.put(let, letCounts.getOrDefault(let, 0) + 1);
+        }
+
+        // Check the number of characters with odd counts
+        for (int val : letCounts.values()) {
+            if (val % 2 != 0) {
+                odd++;
+            }
+        }
+
+        // Return true if at most one character has an odd count
+        return odd <= 1;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(isPalPerm("carereca")); // true
+        System.out.println(isPalPerm("a")); // true
+        System.out.println(isPalPerm("carelnreca")); // false
+    }
