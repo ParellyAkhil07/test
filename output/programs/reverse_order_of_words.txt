@@ -1,0 +1,43 @@
+import java.util.Arrays;
+import java.util.List;
+
+public class ReverseOrderOfWords {
+
+    public static List<Character> reverseOrderOfWords(List<Character> lst) {
+        // Join the list of characters into a single string
+        StringBuilder words = new StringBuilder();
+        for (Character ch : lst) {
+            words.append(ch);
+        }
+        
+        // Split the string into words
+        String[] wordsArr = words.toString().split(" ");
+        
+        // Create a list to store the reversed words
+        List<String> reversedArr = new ArrayList<>();
+        
+        // Pop words from the array and add to the reversed list
+        for (int i = wordsArr.length - 1; i >= 0; i--) {
+            reversedArr.add(wordsArr[i]);
+        }
+        
+        // Join the reversed words into a single string
+        String reversedWords = String.join(" ", reversedArr);
+        
+        // Convert the string back to a list of characters
+        List<Character> result = new ArrayList<>();
+        for (char ch : reversedWords.toCharArray()) {
+            result.add(ch);
+        }
+        
+        return result;
+    }
+
+    public static void main(String[] args) {
+        // Test the function with a sample input
+        List<Character> input = Arrays.asList('p', 'r', 'a', 'c', 't', 'i', 'c', 'e', ' ', 'm', 'a', 'k', 'e', 's', ' ', 'p', 'e', 'r', 'f', 'e', 'c', 't', ' ', 'y', 'o', 'u');
+        List<Character> output = reverseOrderOfWords(input);
+        
+        // Expected output: ['y', 'o', 'u', ' ', 'p', 'e', 'r', 'f', 'e', 'c', 't', ' ', 'm', 'a', 'k', 'e', 's', ' ', 'p', 'r', 'a', 'c', 't', 'i', 'c', 'e']
+        System.out.println(output);
+    }
