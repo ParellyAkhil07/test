@@ -1,0 +1,60 @@
+
+import java.util.regex.*;
+
+public class DecodeString {
+
+    // Decodes a string. A valid code is a sequence of numbers and letters, always starting with a number and ending with letter(s).
+    // Each number tells you how many characters to skip before finding a good letter. After each good letter should come the next number.
+    public static String decode(String s) {
+        // Runtime: O(n)
+        // Spacetime: O(n)
+
+        StringBuilder decoded = new StringBuilder();
+
+        for (int l = 0; l < s.length(); l++) {
+            try {
+                int num = Integer.parseInt(String.valueOf(s.charAt(l)));
+                decoded.append(s.charAt(num + l + 1));
+            } catch (NumberFormatException e) {
+                continue;
+            }
+        }
+
+        return decoded.toString();
+    }
+
+    // Decodes a string using a recursive approach.
+    public static String decode2(String s) {
+        // Runtime: O(n)
+        // Spacetime: O(n)
+
+        return _decode2(s, new StringBuilder(), 0);
+    }
+
+    private static String _decode2(String s, StringBuilder decoded, int i) {
+        if (i >= s.length()) {
+            return decoded.toString();
+        }
+
+        char current = s.charAt(i);
+
+        if (Character.isDigit(current)) {
+            decoded.append(s.charAt(Character.getNumericValue(current) + i + 1));
+        }
+
+        return _decode2(s, decoded, i + 1);
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        assert decode("0h").equals("h");
+        assert decode("2abh").equals("h");
+        assert decode("0h1ae2bcy").equals("hey");
+
+        assert decode2("0h").equals("h");
+        assert decode2("2abh").equals("h");
+        assert decode2("0h1ae2bcy").equals("hey");
+
+        System.out.println("ALL TESTS PASSED!");
+    }
+}
