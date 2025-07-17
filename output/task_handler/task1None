@@ -1,0 +1,6 @@
+public class Task1 {
+    public static void main(String[] args) {
+        // Print the message "UNLOADING VESSEL" to the console
+        System.out.println("UNLOADING VESSEL");
+    }
+}
