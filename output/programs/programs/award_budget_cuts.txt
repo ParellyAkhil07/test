@@ -1,0 +1,46 @@
+
+public class AwardBudgetCuts {
+
+    // Function to find the cap for grants
+    public static double findGrantCap(double[] grantsArray, double newBudget) {
+        // Sort the grants array in descending order
+        Arrays.sort(grantsArray);
+        int n = grantsArray.length;
+        int i = n - 1;
+        boolean flag = false;
+        double cap = newBudget / n;
+        newBudget = (double) newBudget;
+
+        // Iterate to find the cap
+        while (!flag) {
+            // Adjust the budget and index if cap is greater than current grant
+            while (cap > grantsArray[i]) {
+                newBudget -= grantsArray[i];
+                i--;
+            }
+
+            // Calculate new cap
+            double newCap = newBudget / (i + 1);
+
+            // Check if the cap has stabilized
+            if (cap == newCap) {
+                flag = true;
+            }
+
+            cap = newCap;
+        }
+
+        return cap;
+    }
+
+    // Main method to run tests
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(findGrantCap(new double[]{2, 100, 50, 120, 1000}, 190) == 47);
+        System.out.println(findGrantCap(new double[]{2, 4}, 3) == 1.5);
+        System.out.println(findGrantCap(new double[]{2, 4, 6}, 3) == 1);
+        System.out.println(findGrantCap(new double[]{2, 100, 50, 120, 1000}, 190) == 47);
+        System.out.println(findGrantCap(new double[]{2, 100, 50, 120, 167}, 400) == 128);
+        System.out.println(findGrantCap(new double[]{21, 100, 50, 120, 130, 110}, 140) == 23.8);
+        System.out.println(findGrantCap(new double[]{210, 200, 150, 193, 130, 110, 209, 342, 117}, 1530) == 211);
+    }
