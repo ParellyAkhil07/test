@@ -1,0 +1,69 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+// Define the Node class
+class Node {
+    int data;
+    Node left, right;
+
+    // Constructor for Node
+    Node(int data, Node left, Node right) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+// Main class to check if a tree is a binary search tree
+public class BinaryTreeChecker {
+
+    // Method to check if the tree is a binary search tree
+    public static boolean isBST(Node root) {
+        return isBSTRecursive(root, null, null);
+    }
+
+    // Helper recursive method to validate the binary search tree
+    private static boolean isBSTRecursive(Node root, Integer smallest, Integer largest) {
+        if (root == null) {
+            return true;
+        }
+
+        if (largest != null && root.data > largest) {
+            return false;
+        }
+
+        if (smallest != null && root.data < smallest) {
+            return false;
+        }
+
+        if (!isBSTRecursive(root.left, smallest, root.data)) {
+            return false;
+        }
+
+        if (!isBSTRecursive(root.right, root.data, largest)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Test class to perform unit tests
+    public static class Tests {
+
+        // Helper method to create a non-BST
+        private Node createBST1() {
+            return new Node(5, new Node(3, new Node(1, null, null), new Node(9, null, null)), new Node(6, null, null));
+        }
+
+        // Helper method to create a valid BST
+        private Node createBST2() {
+            return new Node(5, new Node(3, new Node(1, null, null), new Node(4, null, null)), new Node(7, new Node(6, null, null), new Node(8, null, null)));
+        }
+
+        // Test method to validate the isBST function
+        @Test
+        public void testIsBST() {
+            assertFalse(BinaryTreeChecker.isBST(createBST1()));
+            assertTrue(BinaryTreeChecker.isBST(createBST2()));
+        }
+    }
