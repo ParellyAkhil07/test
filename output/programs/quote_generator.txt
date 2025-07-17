@@ -1,0 +1,43 @@
+
+public class QuoteGenerator {
+
+    private int lastRandNum;
+    private String[] quotes;
+    private Random random;
+
+    // Constructor to initialize the QuoteGenerator with quotes
+    public QuoteGenerator(String[] quotes) {
+        this.lastRandNum = -1;
+        this.quotes = quotes;
+        this.random = new Random();
+    }
+
+    // Method to generate a random quote
+    public String generateQuote() {
+        int randomNum = random.nextInt(quotes.length);
+
+        // Ensure the new random number is different from the last one
+        if (randomNum != lastRandNum) {
+            lastRandNum = randomNum;
+            return quotes[randomNum];
+        } else {
+            return generateQuote(); // Retry if the same number is generated
+        }
+    }
+
+    public static void main(String[] args) {
+        String[] quotes = {"hi", "hello", "goodbye", "dog", "cat", "banana"};
+        QuoteGenerator generator1 = new QuoteGenerator(quotes);
+
+        // Generate and print quotes
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+        System.out.println(generator1.generateQuote());
+    }
