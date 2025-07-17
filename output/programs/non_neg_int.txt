@@ -1,0 +1,40 @@
+
+public class NonNegIntFinder {
+
+    // Takes an array and returns a non-negative integer that is not in the original array.
+    // Returns null if all integers are in the array.
+    // Runtime: O(n)
+    // Spacetime: O(n)
+
+    public static Integer findInt(int[] arr) {
+        // Create a HashSet for O(1) lookup
+        HashSet<Integer> arrSet = new HashSet<>();
+
+        // If the length of the array is equal to the maximum allowed integers, there are no missing integers in the array.
+        if (arr.length == Integer.MAX_VALUE) {
+            return null;
+        }
+
+        // Populate the HashSet with integers from the array
+        for (int num : arr) {
+            arrSet.add(num);
+        }
+
+        // Loop through the length of the array + 1 and check if the number is in the HashSet. If it isn't, return that number.
+        for (int i = 0; i <= arr.length; i++) {
+            if (!arrSet.contains(i)) {
+                return i;
+            }
+        }
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(findInt(new int[]{0, 2, 1, 3, 4, 5, 11, 32, 42, 50, 100, 6})); // 7
+        System.out.println(findInt(new int[]{2, 4, 5, 1, 3})); // 0
+        System.out.println(findInt(new int[]{0, 2, 4, 5, 1, 3})); // 6
+        System.out.println(findInt(new int[]{0, 2, 4, 5, 1, 3, 6, 8})); // 7
+        System.out.println(findInt(new int[]{})); // 0
+    }
