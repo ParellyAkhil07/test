@@ -1,0 +1,38 @@
+import java.util.Map;
+
+public class AnagramOfPalindrome {
+
+    // Is the word an anagram of a palindrome?
+    public static boolean isAnagramOfPalindrome(String word) {
+        // Create a map to count occurrences of each character
+        Map<Character, Integer> wordMap = new HashMap<>();
+
+        // Populate the map with character counts
+        for (char l : word.toCharArray()) {
+            wordMap.put(l, wordMap.getOrDefault(l, 0) + 1);
+        }
+
+        // Check if more than one character has an odd count
+        int oddCount = 0;
+        for (int count : wordMap.values()) {
+            if (count % 2 != 0) {
+                oddCount++;
+            }
+            if (oddCount > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(isAnagramOfPalindrome("a")); // True
+        System.out.println(isAnagramOfPalindrome("ab")); // False
+        System.out.println(isAnagramOfPalindrome("aab")); // True
+        System.out.println(isAnagramOfPalindrome("arceace")); // True
+        System.out.println(isAnagramOfPalindrome("arceaceb")); // False
+
+        // If all tests pass
+        System.out.println("ALL TESTS PASSED!");
+    }
