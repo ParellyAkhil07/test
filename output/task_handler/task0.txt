@@ -1,2 +1,0 @@
-// // Java equivalent of the Python code
-// // SHIP DOCKING
