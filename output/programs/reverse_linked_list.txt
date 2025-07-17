@@ -1,0 +1,50 @@
+class Node {
+    int data; // Data stored in the node
+    Node next; // Reference to the next node
+
+    // Constructor to initialize the node
+    public Node(int data, Node next) {
+        this.data = data;
+        this.next = next;
+    }
+
+    // Method to represent the linked list as a string
+    public String asString() {
+        StringBuilder out = new StringBuilder();
+        Node n = this;
+
+        while (n != null) {
+            out.append(n.data);
+            n = n.next;
+        }
+
+        return out.toString();
+    }
+}
+
+// Function to reverse a linked list
+public class ReverseLinkedList {
+    public static Node reverseLinkedList(Node head) {
+        Node prev = null;
+        Node curr = head;
+
+        while (curr != null) {
+            Node next = curr.next; // Store next node
+            curr.next = prev; // Reverse the link
+            prev = curr; // Move prev to current
+            curr = next; // Move to next node
+        }
+
+        return prev; // New head of the reversed list
+    }
+
+    // Main method to test the reverseLinkedList function
+    public static void main(String[] args) {
+        Node ll = new Node(1, new Node(2, new Node(3, null)));
+        Node reversed = reverseLinkedList(ll);
+        System.out.println(reversed.asString()); // Should print '321'
+
+        Node ll2 = new Node(1, new Node(2, new Node(3, null)));
+        Node newLl = reverseLinkedList(ll2);
+        System.out.println(newLl.asString()); // Should print '321'
+    }
