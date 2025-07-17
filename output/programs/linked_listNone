@@ -1,0 +1,112 @@
+
+class Node {
+    // Creates a node
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    // Creates a linked list
+    private Node head;
+    private Node tail;
+
+    public LinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    public void insert(int data, int position) {
+        // Takes data as an input and a position and adds it to the linked list as a node before that position
+        Node newNode = new Node(data);
+
+        if (position == 0) {
+            newNode.next = head;
+            head = newNode;
+            if (tail == null) {
+                tail = newNode;
+            }
+            return;
+        }
+
+        if (position == size()) {
+            if (tail != null) {
+                tail.next = newNode;
+            }
+            tail = newNode;
+            if (head == null) {
+                head = newNode;
+            }
+            return;
+        }
+
+        Node prev = null;
+        Node curr = head;
+        int index = 0;
+
+        while (curr != null) {
+            if (position == index) {
+                prev.next = newNode;
+                newNode.next = curr;
+                return;
+            }
+            index++;
+            prev = curr;
+            curr = curr.next;
+        }
+    }
+
+    public int size() {
+        // Returns the length of the linked list
+        int size = 0;
+        Node curr = head;
+
+        while (curr != null) {
+            size++;
+            curr = curr.next;
+        }
+
+        return size;
+    }
+
+    public Node search(int data) {
+        // Takes data as an input and returns the node holding the data
+        Node curr = head;
+
+        while (curr != null) {
+            if (curr.data == data) {
+                return curr;
+            }
+            curr = curr.next;
+        }
+
+        throw new IllegalArgumentException("Data not in linked list.");
+    }
+
+    public void delete(int data) {
+        // Takes data as an input and deletes the node with that data
+        Node prev = null;
+        Node curr = head;
+
+        while (curr != null) {
+            if (curr.data == data) {
+                if (curr == head) {
+                    head = curr.next;
+                } else {
+                    prev.next = curr.next;
+                }
+                if (curr == tail) {
+                    tail = prev;
+                }
+                return;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
+
+        throw new IllegalArgumentException("Data not in linked list.");
+    }
