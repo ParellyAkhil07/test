@@ -1,0 +1,51 @@
+// Can't use built-in reverse methods.
+
+public class ReverseString {
+
+    // Method to reverse a string using a loop
+    public static String revStr(String string) {
+        // Initialize an empty string for the reversed result
+        String reversedStr = "";
+        // Convert the input string to a character array
+        char[] listStr = string.toCharArray();
+        // Iterate over the character array from the end to the beginning
+        for (int i = listStr.length - 1; i >= 0; i--) {
+            // Append each character to the reversed string
+            reversedStr += listStr[i];
+        }
+        return reversedStr;
+    }
+
+    // Method to reverse a string using StringBuilder
+    public static String revStr2(String string) {
+        // Use StringBuilder to reverse the string
+        return new StringBuilder(string).reverse().toString();
+    }
+
+    // Method to reverse a string using recursion
+    public static String revStr3(String string) {
+        // Base case: if the string is empty, return it
+        if (string.length() == 0) {
+            return string;
+        }
+        // Recursive case: return the last character plus the reverse of the rest
+        return string.charAt(string.length() - 1) + revStr3(string.substring(0, string.length() - 1));
+    }
+
+    public static void main(String[] args) {
+        // Test cases to verify the methods
+        System.out.println(revStr("hello").equals("olleh")); // true
+        System.out.println(revStr("1234h").equals("h4321")); // true
+        System.out.println(revStr("").equals("")); // true
+
+        System.out.println(revStr2("hello").equals("olleh")); // true
+        System.out.println(revStr2("1234h").equals("h4321")); // true
+        System.out.println(revStr2("").equals("")); // true
+
+        System.out.println(revStr3("hello").equals("olleh")); // true
+        System.out.println(revStr3("1234h").equals("h4321")); // true
+        System.out.println(revStr3("").equals("")); // true
+
+        // If all tests pass, print success message
+        System.out.println("ALL TESTS PASSED!");
+    }
