@@ -1,0 +1,5 @@
+public class TaskHandler {
+    public static void main(String[] args) {
+        // Print "CUSTOMS CHECK" to the console
+        System.out.println("CUSTOMS CHECK");
+    }
